@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mhurd <marvin@42.fr>                       +#+  +:+       +#+        */
+/*   By: mhurd <mhurd@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/28 19:36:28 by mhurd             #+#    #+#             */
-/*   Updated: 2016/09/28 19:37:08 by mhurd            ###   ########.fr       */
+/*   Updated: 2016/09/30 00:31:43 by mhurd            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,15 +29,17 @@ int	main(int ac, char **av)
 		clock_t begin = clock();
 		pieces = parse_file((fd = open(av[1], O_RDONLY)));
 		close(fd);
-		while (pieces)
-		{
-			ft_printjoin("\n", (char **)(pieces->content), 4);
-			ft_putstr("\n\n");
-			pieces = pieces->next;
-		}
+		// while (pieces)
+		// {
+		// 	ft_printjoin("\n", (char **)(pieces->content), 4);
+		// 	ft_putstr("\n\n");
+		// 	pieces = pieces->next;
+		// }
+		t_board *b = solve(pieces);
 		clock_t end = clock();
+		ft_printjoin("\n", b->board, b->size);
 		double time_spent = (double)(end - begin) / CLOCKS_PER_SEC;
-		printf("%f\n", time_spent);
+		printf("\n%f\n", time_spent);
 	}
 	else
 		ft_putendl("usage: ./fillit pieces_file");

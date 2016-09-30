@@ -6,7 +6,7 @@
 #    By: mhurd <marvin@42.fr>                       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/09/28 19:34:56 by mhurd             #+#    #+#              #
-#    Updated: 2016/09/28 22:15:37 by mhurd            ###   ########.fr        #
+#    Updated: 2016/09/29 23:45:21 by mhurd            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,7 +15,9 @@ NAME	= fillit
 SRC		= main.c \
 		  parser.c \
 		  error.c \
-		  struct_handlers.c
+		  struct_handlers.c \
+		  board.c \
+		  solver.c
 
 OBJ		= $(addprefix $(OBJDIR),$(SRC:.c=.o))
 
