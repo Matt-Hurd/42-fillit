@@ -11,10 +11,10 @@
 /* ************************************************************************** */
 
 #include "fillit.h"
-#include <stdlib.h>
 
-void	throw_error(char *text, int num)
+void	throw_error(char *text, int num, int fd)
 {
 	ft_putendl_fd(text, 2);
+	close(fd);
 	exit(num);
 }

@@ -11,10 +11,36 @@
 /* ************************************************************************** */
 
 #include "fillit.h"
-#include <fcntl.h>
 #include <unistd.h>
 
 int			valid_piece(char **p)
+{
+	int x;
+	int y;
+	int count;
+
+	count = 0;
+	x = -1;
+	while (++x < 4)
+	{
+		y = -1;
+		while (++y < 4)
+		{
+			if (p[x][y] == '#')
+			{
+				if (!((x > 0 && p[x - 1][y] == '#')
+					|| (x < 3 && p[x + 1][y] == '#')
+					|| (y > 0 && p[x][y - 1] == '#')
+					|| (y < 3 && p[x][y + 1] == '#')))
+					return (0);
+				count++;
+			}
+		}
+	}
+	return (count == 4);
+}
+
+int			valid_array(char **p)
 {
 	int x;
 	int y;
@@ -29,46 +55,39 @@ int			valid_piece(char **p)
 			return (0);
 		while (++y < 4)
 			if (!p[x][y] || (p[x][y] != '.' && p[x][y] != '#'))
-				return (0); 
+				return (0);
 	}
-	return (1);
+	return (valid_piece(p));
 }
 
 /*
 ** TODO: Close file
-** TODO: Change errors to print "error"
 */
 
-t_list		*parse_file(char *file)
+t_list		*parse_file(int fd)
 {
-	int			fd;
 	char		**buffer;
 	int			result;
 	char		*read_buff;
 	t_list		*ret;
 
-	fd = open(file, O_RDONLY);
 	read_buff = ft_strnew(20);
-	if (fd < 1)
-			throw_error("Error opening file", -1);
 	while ((result = read(fd, read_buff, 20)) > 0)
 	{
 		buffer = ft_strsplit(read_buff, '\n');
-		if (valid_piece(buffer))
+		if (valid_array(buffer) && result == 20)
 		{
-			if (!ret)
-				ret = ft_lstnew(dup_array(buffer), sizeof(char *) * 4);
-			else
-				ft_lstadd(&ret, ft_lstnew(dup_array(buffer), sizeof(char *) * 4));
+			ret ? ret = ft_lstnew(dup_array(buffer), sizeof(char *) * 4) :
+			ft_lstadd(&ret, ft_lstnew(dup_array(buffer), sizeof(char *) * 4));
 			ft_strclr(read_buff);
 			result = read(fd, read_buff, 1);
 			if (result < 0 || (result == 1 && !ft_strequ(read_buff, "\n")))
-				throw_error("Bad input file", -1);
+				throw_error("error", -1, fd);
 		}
 		else
-			throw_error("Bad input file", -1);
+			throw_error("error", -1, fd);
 	}
-	if (result < 0)
-		throw_error("Error reading file", -1);
+	if (!ret || result < 0 || ft_strequ(read_buff, "\n"))
+		throw_error("error", -1, fd);
 	return (ret);
 }

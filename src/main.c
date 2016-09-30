@@ -22,11 +22,13 @@
 int	main(int ac, char **av)
 {
 	t_list	*pieces;
+	int		fd;
 
 	if (ac == 2)
 	{
 		clock_t begin = clock();
-		pieces = parse_file(av[1]);
+		pieces = parse_file((fd = open(av[1], O_RDONLY)));
+		close(fd);
 		while (pieces)
 		{
 			ft_printjoin("\n", (char **)(pieces->content), 4);

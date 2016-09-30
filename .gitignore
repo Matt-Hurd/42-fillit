@@ -1,0 +1,6 @@
+*.fillit
+._*
+.DS_Store
+*.a
+*.o
+fillit

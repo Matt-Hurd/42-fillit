@@ -13,9 +13,12 @@
 #ifndef FILLIT_H
 # define FILLIT_H
 # include "libft.h"
+#include <fcntl.h>
+#include <stdlib.h>
+#include <unistd.h>
 
-void			throw_error(char *text, int num);
-t_list			*parse_file(char *file);
+void			throw_error(char *text, int num, int fd);
+t_list			*parse_file(int fd);
 char			**dup_array(char **in);
 
 #endif
