@@ -11,16 +11,9 @@
 /* ************************************************************************** */
 
 #include "fillit.h"
-
-
-
-
-
-#include <stdio.h>
-
+#include <stdio.h> // Delete
 
 int count = 0;
-
 
 int		backtrack(t_board *b, t_list *tetris)
 {
@@ -57,6 +50,5 @@ t_board	*solve(t_list *tetris)
 	size = 2;
 	while (!backtrack((b = gen_board(size)), tetris))
 		size++;
-	// printf("AAYYY\n");
 	return (b);
 }

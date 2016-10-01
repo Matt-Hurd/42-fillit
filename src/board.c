@@ -11,20 +11,10 @@
 /* ************************************************************************** */
 
 #include "fillit.h"
-
-
-
-
-
-
-#include <stdio.h>
-
-
-
+#include <stdio.h> // Delete
 
 t_board	*gen_board(int size)
 {
-	// printf("Making Board\n");
 	t_board *b;
 	int		x;
 
@@ -37,13 +27,11 @@ t_board	*gen_board(int size)
 		ft_memset((void *)b->board[x], '.', size);
 	}
 	b->size = size;
-	// printf("Made Board\n");
 	return (b);
 }
 
 int		place(t_board *b, char **piece, int y_origin, int x_origin)
 {
-	// printf("Placing\n");
 	int y;
 	int x;
 
@@ -59,7 +47,6 @@ int		place(t_board *b, char **piece, int y_origin, int x_origin)
 				if (y_origin + y >= b->size || x_origin + x >= b->size 
 					|| b->board[y_origin + y][x_origin + x] == '#')
 				{
-					// printf("Unable to place\n");
 					return (0);
 				}
 			}
@@ -74,14 +61,11 @@ int		place(t_board *b, char **piece, int y_origin, int x_origin)
 
 void	unplace(t_board *b, char **piece, int y_origin, int x_origin)
 {
-	// printf("Unplacing\n");
 	int y;
 	int x;
 
 	x = -1;
 	y = -1;
-	// ft_printjoin("\n", b->board, b->size);
-	// ft_putstr("\n\n");
 	while (++y < 4 && piece[y])
 	{
 		x = -1;
@@ -89,8 +73,4 @@ void	unplace(t_board *b, char **piece, int y_origin, int x_origin)
 			if (piece[y][x] == '#')
 				b->board[y_origin + y][x_origin + x] = '.';
 	}
-	// ft_printjoin("\n", b->board, b->size);
-	// ft_putstr("\n\n");
-	// printf("Unplaced\n");
 }
-

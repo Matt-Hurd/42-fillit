@@ -11,13 +11,8 @@
 /* ************************************************************************** */
 
 #include "fillit.h"
-
-
-
-
-#include <stdio.h>
-#include <time.h>
-
+#include <stdio.h> // Delete
+#include <time.h> // Delete
 
 int	main(int ac, char **av)
 {
@@ -29,12 +24,6 @@ int	main(int ac, char **av)
 		clock_t begin = clock();
 		pieces = parse_file((fd = open(av[1], O_RDONLY)));
 		close(fd);
-		// while (pieces)
-		// {
-		// 	ft_printjoin("\n", (char **)(pieces->content), 4);
-		// 	ft_putstr("\n\n");
-		// 	pieces = pieces->next;
-		// }
 		t_board *b = solve(pieces);
 		clock_t end = clock();
 		ft_printjoin("\n", b->board, b->size);

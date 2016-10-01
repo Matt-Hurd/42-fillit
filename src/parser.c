@@ -12,7 +12,6 @@
 
 #include "fillit.h"
 
-
 void		clean(char **p)
 {
 	int x;
@@ -96,10 +95,6 @@ int			valid_array(char **p)
 	}
 	return (valid_piece(p));
 }
-
-/*
-** TODO: Close file
-*/
 
 t_list		*parse_file(int fd)
 {

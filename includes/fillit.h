@@ -13,9 +13,9 @@
 #ifndef FILLIT_H
 # define FILLIT_H
 # include "libft.h"
-#include <fcntl.h>
-#include <stdlib.h>
-#include <unistd.h>
+# include <fcntl.h>
+# include <stdlib.h>
+# include <unistd.h>
 
 typedef struct	s_board
 {
@@ -30,6 +30,5 @@ t_board			*gen_board(int size);
 int				place(t_board *b, char **piece, int y_origin, int x_origin);
 void			unplace(t_board *b, char **piece, int y_origin, int x_origin);
 t_board			*solve(t_list *tetris);
-
 
 #endif
