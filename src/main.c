@@ -17,18 +17,19 @@
 int	main(int ac, char **av)
 {
 	t_list	*pieces;
-	int		fd;
+	int		read_from;
 
 	if (ac == 2)
 	{
-		clock_t begin = clock();
-		pieces = parse_file((fd = open(av[1], O_RDONLY)));
-		close(fd);
+		if ((read_from = open(av[1], O_RDONLY)) == -1)
+		{
+			ft_putendl_fd("Could not open file");
+			return (-1);
+		}
+		pieces = parse_file((read_from = open(av[1], O_RDONLY)));
+		close(read_from);
 		t_board *b = solve(pieces);
-		clock_t end = clock();
 		ft_printjoin("\n", b->board, b->size);
-		double time_spent = (double)(end - begin) / CLOCKS_PER_SEC;
-		printf("\n%f\n", time_spent);
 	}
 	else
 		ft_putendl("usage: ./fillit pieces_file");
