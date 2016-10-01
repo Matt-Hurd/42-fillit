@@ -3,16 +3,17 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: mhurd <marvin@42.fr>                       +#+  +:+       +#+         #
+#    By: mfernand <mfernand@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/09/28 19:34:56 by mhurd             #+#    #+#              #
-#    Updated: 2016/09/29 23:45:21 by mhurd            ###   ########.fr        #
+#    Updated: 2016/09/30 19:28:22 by mfernand         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME	= fillit 
 
 SRC		= main.c \
+		  fillit.c \
 		  parser.c \
 		  error.c \
 		  struct_handlers.c \

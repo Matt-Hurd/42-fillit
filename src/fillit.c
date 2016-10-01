@@ -1,48 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   fillit.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mfernand <mfernand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/09/28 19:36:28 by mhurd             #+#    #+#             */
-/*   Updated: 2016/09/30 19:32:54 by mfernand         ###   ########.fr       */
+/*   Created: 2016/09/30 19:15:27 by mfernand          #+#    #+#             */
+/*   Updated: 2016/09/30 19:34:12 by mfernand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fillit.h"
 
-const char g_usage_string[] = "usage: ./fillit <pieces_file>";
-const char g_example_string[] =
-"Example file:\n\n"
-"....\n"
-"##..\n"
-".#..\n"
-".#..\n\n"
+const char g_file_open_error[] = "Could not open the file";
 
-"....\n"
-"####\n"
-"....\n"
-"....\n\n"
-
-"#...\n"
-"###.\n"
-"....\n"
-"....\n\n"
-
-"....\n"
-"##..\n"
-".##.\n"
-"....\n\n";
-
-int	main(int ac, char **av)
+void	run_fillit(const char *file_path)
 {
-	if (ac == 2)
-		run_fillit(av[1]);
-	else
+	t_list	*pieces;
+	t_board	*b;
+	int		read_from;
+
+	if ((read_from = open(file_path, O_RDONLY)) == -1)
 	{
-		ft_putendl(g_usage_string);
-		ft_putstr(g_example_string);
+		ft_putendl_fd(g_file_open_error, 2);
+		return ;
 	}
-	return (0);
+	pieces = parse_file(read_from);
+	close(read_from);
+	b = solve(pieces);
+	ft_printjoin("\n", b->board, b->size);
 }

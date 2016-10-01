@@ -3,15 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   board.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mhurd <mhurd@student.42.fr>                +#+  +:+       +#+        */
+/*   By: mfernand <mfernand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/29 23:04:22 by mhurd             #+#    #+#             */
-/*   Updated: 2016/09/30 01:08:50 by mhurd            ###   ########.fr       */
+/*   Updated: 2016/09/30 19:32:27 by mfernand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fillit.h"
-#include <stdio.h> // Delete
 
 t_board	*gen_board(int size)
 {

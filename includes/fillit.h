@@ -3,25 +3,30 @@
 /*                                                        :::      ::::::::   */
 /*   fillit.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mhurd <mhurd@student.42.fr>                +#+  +:+       +#+        */
+/*   By: mfernand <mfernand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/28 19:37:52 by mhurd             #+#    #+#             */
-/*   Updated: 2016/09/30 00:31:14 by mhurd            ###   ########.fr       */
+/*   Updated: 2016/09/30 19:32:21 by mfernand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FILLIT_H
 # define FILLIT_H
+
 # include "libft.h"
 # include <fcntl.h>
 # include <stdlib.h>
 # include <unistd.h>
+# include <stdio.h> // Delete
+# include <time.h> // Delete
 
 typedef struct	s_board
 {
 	int		size;
 	char	**board;
 }				t_board;
+
+void			run_fillit(const char *file_path);
 
 void			throw_error(char *text, int num, int fd);
 t_list			*parse_file(int fd);
