@@ -6,7 +6,7 @@
 /*   By: mhurd <mhurd@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/21 09:58:28 by mhurd             #+#    #+#             */
-/*   Updated: 2016/09/27 15:24:35 by mhurd            ###   ########.fr       */
+/*   Updated: 2016/09/30 20:39:35 by mhurd            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define LIBFT_H
 # include <string.h>
 # define MIN(X, Y) (((X) < (Y)) ? (X) : (Y))
+# define MAX(X, Y) (((X) > (Y)) ? (X) : (Y))
 # define BUFF_SIZE 5000
 
 typedef unsigned char	t_byte;

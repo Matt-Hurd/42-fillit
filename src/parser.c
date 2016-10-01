@@ -6,42 +6,54 @@
 /*   By: mhurd <mhurd@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/28 19:44:55 by mhurd             #+#    #+#             */
-/*   Updated: 2016/09/29 23:47:36 by mhurd            ###   ########.fr       */
+/*   Updated: 2016/09/30 22:12:04 by mhurd            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fillit.h"
 
+const char	*g_patterns[] = {
+	"###...#",
+	".#...#..##",
+	"#...###",
+	"##..#...#",
+	"###.#",
+	"##...#...#",
+	"..#.###",
+	"#...#...##",
+	"###..#",
+	".#..##...#",
+	".#..###",
+	"#...##..#",
+	".##.##",
+	"#...##...#",
+	"##...##",
+	".#..##..#",
+	"####",
+	"#...#...#...#",
+	"##..##"
+};
+
 void		clean(char **p)
 {
-	int x;
-	int y;
-	int x_min;
-	int y_min;
+	int		x;
+	int		y;
+	char	*joined;
 
+	joined = ft_strcjoin("", p, 4);
 	x = -1;
-	x_min = -1;
-	y_min = -1;
-	while (++x < 4)
-	{
-		y = -1;
-		while (++y < 4)
+	while (++x < 19)
+		if (ft_strstr(joined, g_patterns[x]))
 		{
-			if (p[x][y] == '#')
+			y = -1;
+			while (++y < 4)
 			{
-				x_min = (x < x_min || x_min == -1) ? x : x_min;
-				y_min = (y < y_min || y_min == -1) ? y : y_min;
+				ft_strclr(p[y]);
+				if (y * 4 < (int)ft_strlen(g_patterns[x]))
+					ft_strncpy(p[y], g_patterns[x] + (y * 4), 
+						MIN(ft_strlen(g_patterns[x]) - (y * 4), 4));
 			}
 		}
-	}
-	x = -1;
-	while (++x < 4)
-	{
-		if (x + x_min < 4)
-			ft_strcpy(p[x], p[x + x_min] + y_min);
-		else
-			ft_strclr(p[x]);
-	}
 }
 
 int			valid_piece(char **p)
@@ -102,17 +114,20 @@ t_list		*parse_file(int fd)
 	int			result;
 	char		*read_buff;
 	t_list		*ret;
+	int 		count;
 
+	ret = NULL;
 	read_buff = ft_strnew(20);
+	count = 1;
 	while ((result = read(fd, read_buff, 20)) > 0)
 	{
 		buffer = ft_strsplit(read_buff, '\n');
 		if (valid_array(buffer) && result == 20)
 		{
 			if (ret)
-				ft_lstadd(&ret, ft_lstnew(buffer, sizeof(char *) * 4));
+				ft_lstadd_back(&ret, make_piece(buffer, count));
 			else
-				ret = ft_lstnew(buffer, sizeof(char *) * 4);
+				ret = make_piece(buffer, count);
 			ft_strclr(read_buff);
 			result = read(fd, read_buff, 1);
 			if (result < 0 || (result == 1 && !ft_strequ(read_buff, "\n")))
@@ -120,6 +135,7 @@ t_list		*parse_file(int fd)
 		}
 		else
 			throw_error("error", -1, fd);
+		count++;
 	}
 	if (!ret || result < 0 || ft_strequ(read_buff, "\n"))
 		throw_error("error", -1, fd);

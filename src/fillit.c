@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fillit.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mfernand <mfernand@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mhurd <mhurd@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/30 19:15:27 by mfernand          #+#    #+#             */
-/*   Updated: 2016/09/30 19:34:12 by mfernand         ###   ########.fr       */
+/*   Updated: 2016/09/30 22:16:47 by mhurd            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,4 +29,5 @@ void	run_fillit(const char *file_path)
 	close(read_from);
 	b = solve(pieces);
 	ft_printjoin("\n", b->board, b->size);
+	ft_putendl("");
 }
